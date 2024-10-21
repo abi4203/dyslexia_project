@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enter Game</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="/module1">Enter Game</a>
+      <a href="/module2">Speech to Text</a>
+      <a href="/module3">Text Summarization</a>
+      <a href="/module4">Image Search</a>
+      <a href="/module5">Text to Speech</a>
+    </nav>
+    <div class="cover">
+      <div class="heading-cover">
+        <h1>Enter Game</h1>
+      </div>
+      <br />
+      <br>
+      <div class="card">
+        <form id="gameForm">
+          <input
+            type="text"
+            id="player-name"
+            placeholder="Enter your name"
+            required
+          /><br />
+          <input
+            type="password"
+            id="player-code"
+            placeholder="Enter 4-digit code"
+            maxlength="4"
+            required
+          /><br />
+          <button type="submit">Start Game</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("gameForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const name = document.getElementById("player-name").value;
+          const code = document.getElementById("player-code").value;
+          if (code.length === 4) {
+            window.location.href = `/module1/game?name=${encodeURIComponent(
+              name
+            )}&code=${encodeURIComponent(code)}`;
+          } else {
+            alert("Please enter a valid 4-digit code.");
+          }
+        });
+   
+        // Get all navigation links
+        const navLinks = document.querySelectorAll('nav a');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                // Remove 'active' class from all links
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                // Add 'active' class to the clicked link
+                this.classList.add('active');
+            });
+        });
+    </script>
+  </body>
+</html>

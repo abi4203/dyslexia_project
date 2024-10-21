@@ -1,0 +1,7 @@
+Navigate to your project directory in cmd
+
+python -m venv env
+
+env\Scripts\activate
+
+deactivate

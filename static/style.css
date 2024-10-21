@@ -1,0 +1,317 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Dark background color */
+  color: #d9d9d9; /* Light text color */
+  margin: 0;
+}
+
+.cover {
+  margin: auto;
+  max-width: 75%;
+}
+.heading-cover {
+  background-color: #1e1e1e;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px 30px 30px 10px;
+  width: 60%;
+}
+
+.card {
+  max-width: 400px; /* Set a fixed width for card size */
+  background-color: #1e1e1e;
+  padding: 20px; /* Padding inside the card */
+  height: auto; /* Let the content determine the height */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Softer shadow for a card effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+
+h1,
+h2 {
+  color: #ffffff; /* White text color for headers */
+  /* margin-bottom: 15px;  */
+}
+
+nav {
+  height: 70px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  /* border-bottom: 2px sol */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav a {
+  margin: 0 15px; /* Increased margin for spacing */
+  text-decoration: none;
+  color: #333333; /* Darker text color for links */
+  font-weight: bold; /* Bold text for links */
+  padding: 0px 10px;
+}
+
+/* Hover and active state */
+nav a:hover,
+nav a.active {
+  height: 70px;
+  background-color: #121212;
+  color: #ffffff;
+  padding: 0px 10px;
+  /* border-radius: 5px;  */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Image styles */
+img {
+  max-width: 100%; /* Responsive images */
+  height: auto;
+  border-radius: 8px; /* Rounded corners for images */
+}
+
+
+/* Choices list styles */
+#choices-list {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+  max-width: 400px; /* Set a max width for better alignment */
+ 
+}
+
+/* Style for each choice */
+#choices-list li {
+  background-color: #ffffff; /* White background for choices */
+  color: #1e1e1e;
+  margin: 15px 0; /* Space between choices */
+  padding: 15px; /* More padding for a better touch area */
+  border: 2px solid #007bff; /* Blue border */
+  border-radius: 8px; /* More rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+  cursor: pointer;
+  font-family: "Arial", sans-serif; /* Use a modern font */
+  font-size: 16px; /* Font size for better readability */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+/* Hover effect for choices */
+#choices-list li:hover {
+  background-color: #e7f0ff; /* Light blue background on hover */
+  color: #0056b3; /* Darker text color on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active state for selected choices */
+#choices-list li.selected {
+  background-color: #0056b3; /* Darker blue for selected */
+  color: white; /* White text for visibility */
+  border: 2px solid #003d80; /* Darker border for selected */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow for selected */
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+input[type="file"],
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #3c3c3c; /* Darker border color */
+  border-radius: 8px; /* Slightly rounder corners */
+  background-color: #2a2a2a; /* Darker input background */
+  color: #d9d9d9; /* Light text color */
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff; /* Blue focus color for visibility */
+  outline: none;
+}
+
+/* Button Style */
+button,
+.summarize-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #444444; /* Neutral gray button color */
+  color: #ffffff; /* White text for buttons */
+  border: none;
+  border-radius: 8px; /* Rounder corners */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform for scale */
+}
+
+button:hover,
+.summarize-button:hover {
+  background-color: #666666; /* Lighter gray on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Text Area Style */
+textarea {
+  resize: none;
+}
+
+/* Audio Style */
+audio {
+  /* display: block; */
+  margin: 20px auto;
+
+  /* width: 100%; */
+}
+
+/* Content Box Layout */
+.content-box {
+  display: flex;
+  justify-content: space-between; /* Items aligned side by side */
+  gap: 20px; /* Adds space between the form and the audio box */
+}
+
+/* Audio Box */
+.audio-box,
+.output-box {
+  flex: 1;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.form-box {
+  flex: 1;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+label {
+  display: block;
+  /* margin: 10px 0 5px; */
+  color: #d9d9d9;
+}
+
+input[type="file"] {
+  display: none;
+}
+.upload-icon {
+  font-size: 48px; /* Increase the icon size */
+  margin-bottom: 20px; /* Add space below the icon */
+  color: #d9d9d9; /* Color for the icon */
+}
+
+.upload-border {
+  width: 100%;
+  padding: 20px;
+  margin: 10px 0;
+  border: 2px solid #3c3c3c;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  color: #d9d9d9;
+  transition: border-color 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center content */
+  align-items: center; /* Center content */
+  text-align: center;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px;
+  background-color: #444444;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: #8f8f8f;
+}
+
+.upload-dnd {
+  height: 30px;
+  background-color: #d9d9d9;
+  padding: 10px;
+  margin: 0 0;
+  color: #2a2a2a; /* Text color for the drag-and-drop label */
+  font-size: 14px;
+}
+
+/* Add this CSS to your style.css */
+.loading-dots {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  display: none; /* Hidden by default */
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #dfdfdf; /* Blue color */
+  border-radius: 50%;
+  animation: loading 1.4s infinite ease-in-out both;
+  margin: 0 2px;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes loading {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="password"],
+  textarea,
+  select,
+  button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  input[type="text"],
+  input[type="password"],
+  textarea,
+  select,
+  button {
+    font-size: 12px;
+  }
+}

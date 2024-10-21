@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YOLO Object Detection</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="/module1">Enter Game</a>
+      <a href="/module2">Speech to Text</a>
+      <a href="/module3">Text Summarization</a>
+      <a href="/module4">Image Search</a>
+      <a href="/module5">Text to Speech</a>
+    </nav>
+    <div class="cover">
+      <div class="heading-cover">
+        <h1>YOLO Object Detection Game</h1>
+      </div>
+      <br />
+
+      <div class="content-box">
+        <div class="form-box">
+          <h2>Player: <span id="player-name"></span></h2>
+          <h2>Score: <span id="player-score"></span></h2>
+
+          <h2>
+            Detected Object: <span id="object-name">{{ detected_object }}</span>
+          </h2>
+
+          <img
+            src="{{ url_for('module1.video_feed') }}"
+            alt="Video Feed"
+            style="width: 640px; height: 480px"
+          />
+
+          <button onclick="captureFrame()">Capture Frame</button>
+        </div>
+
+        <div class="form-box">
+          
+            <h2>Detected Object Image:</h2>
+            <img
+              id="cropped-image"
+              src=""
+              alt="Cropped Object"
+              style="display: none"
+            />
+
+            <h2>Choices:</h2>
+            <ul id="choices-list"></ul>
+        
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const playerName = urlParams.get("name");
+      const playerCode = urlParams.get("code");
+
+      document.getElementById("player-name").textContent = playerName;
+
+      // Function to get the current player's score
+      function getPlayerScore() {
+        fetch(`/module1/get_score?name=${playerName}&code=${playerCode}`)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("player-score").textContent =
+              data.total_score;
+          });
+      }
+
+      // Fetch the player's score when the page loads
+      getPlayerScore();
+
+      function captureFrame() {
+        fetch("/module1/capture", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("object-name").textContent = data.object;
+
+            // Show cropped detected object image
+            const croppedImage = document.getElementById("cropped-image");
+            croppedImage.src = "/" + data.cropped_image_path.replace("\\", "/");
+            croppedImage.style.display = "block";
+
+            // Update choices
+            const choicesList = document.getElementById("choices-list");
+            choicesList.innerHTML = "";
+            data.choices.forEach((choice) => {
+              const li = document.createElement("li");
+              li.textContent = choice;
+              li.onclick = function () {
+                // Remove 'selected' class from all choices
+                const choices = document.querySelectorAll("#choices-list li");
+                choices.forEach((choice) =>
+                  choice.classList.remove("selected")
+                );
+
+                // Add 'selected' class to the clicked choice
+                li.classList.add("selected");
+
+                if (choice === data.object) {
+                  // Correct answer, update score
+                  updateScore(playerName, playerCode, 10);
+                } else {
+                  alert("Incorrect choice. Try again!");
+                }
+              };
+
+              choicesList.appendChild(li);
+            });
+          });
+      }
+
+      function updateScore(name, code, score) {
+        fetch("/module1/update_score", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, code, score }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("player-score").textContent =
+              data.total_score;
+            alert(`Score updated! Your total score is: ${data.total_score}`);
+          });
+      }
+    </script>
+  </body>
+</html>

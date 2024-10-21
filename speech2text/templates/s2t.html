@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speech to Text Converter</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="/module1">Enter Game</a>
+      <a href="/module2">Speech to Text</a>
+      <a href="/module3">Text Summarization</a>
+      <a href="/module4">Image Search</a>
+      <a href="/module5">Text to Speech</a>
+    </nav>
+    <div class="cover">
+      <div class="heading-cover">
+        <h1>Speech to Text Converter</h1>
+      </div>
+      <br />
+      <br />
+      <div class="content-box">
+        <div class="audio-box">
+          <div class="upload-border">
+            <i class="fas fa-upload upload-icon"></i>
+            <div>
+              <label for="file-upload" class="custom-file-upload">
+                Click to upload
+              </label>
+              <input type="file" id="file-upload" accept="audio/*" />
+
+              <!-- <a class="upload-dnd">or drag and drop</a> -->
+            </div>
+          </div>
+
+          <button id="uploadBtn">Upload and Convert</button>
+        </div>
+
+        <!-- Transcription result -->
+        <div class="output-box">
+          <h3>Audio Preview:</h3>
+          <audio id="audioPlayer" controls></audio>
+          <br />
+
+          <h3>Transcription Result:</h3>
+          <div id="loadingDots" class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <textarea id="result" rows="10" readonly> </textarea>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const fileInput = document.getElementById("file-upload");
+      const uploadBtn = document.getElementById("uploadBtn");
+      const resultText = document.getElementById("result");
+      const audioPlayer = document.getElementById("audioPlayer");
+      const loadingDots = document.getElementById("loadingDots");
+
+      uploadBtn.addEventListener("click", () => {
+        const file = fileInput.files[0];
+        if (file) {
+          // Play the selected audio
+          const fileURL = URL.createObjectURL(file);
+          audioPlayer.src = fileURL;
+
+          const formData = new FormData();
+          formData.append("audio", file);
+
+          // Show loading dots when uploading
+          loadingDots.style.display = "inline-block";
+          resultText.value = ""; // Clear previous transcription
+
+          // Send audio file to backend for transcription
+          fetch("/module2/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Hide loading dots when transcription is done
+              loadingDots.style.display = "none";
+
+              // Display the transcription or any error message
+              resultText.value =
+                data.transcription ||
+                data.error ||
+                "No transcription available.";
+            })
+            .catch((error) => {
+              console.error("Error uploading file:", error);
+              loadingDots.style.display = "none"; // Hide loading dots on error
+            });
+        } else {
+          alert("Please select an audio file.");
+        }
+      });
+    </script>
+  </body>
+</html>

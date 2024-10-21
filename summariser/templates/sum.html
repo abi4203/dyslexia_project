@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Summarization</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+   <nav>
+      <a href="/">Enter Game</a>
+      <a href="/module2">Speech to Text</a>
+      <a href="/module3">Text Summarization</a>
+      <a href="/module4">Image Search</a>
+      <a href="/module5">Text to Speech</a>
+    </nav>
+
+    <div class="cover">
+      <div class="heading-cover">
+        <h1>Text Summarization</h1>
+      </div>
+      <br>
+      <br>
+      <div class="content-box">
+        <!-- Form Section -->
+        <div class="form-box">
+          <form action="{{ url_for('module3.summarize') }}" method="POST">
+            <label for="input_text">Enter the text to summarize:</label>
+            <textarea id="input_text" name="input_text" rows="10" required>
+{{ input_text }}</textarea
+            >
+            <button type="submit" class="summarize-button">Summarize</button>
+          </form>
+        </div>
+
+        <!-- Summarized Text Section -->
+        <div class="output-box">
+          <label>Summarized Text:</label>
+          <textarea id="summarized_text" rows="10" readonly>
+{{ summarized_text }}</textarea
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

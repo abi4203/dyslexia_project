@@ -1,0 +1,10 @@
+/env
+/game.db
+/uploaded_audio.wav
+/yolov8n.pt
+game/__pycache__/
+text2img/__pycache__/
+speech2text/__pycache__/
+summariser/__pycache__/
+summariser/summarization_model/
+text2speech/__pycache__/
